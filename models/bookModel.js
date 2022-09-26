@@ -1,4 +1,5 @@
 const mongoose=require('mongoose');
+const { model } = require('mongoose');
 const db_link='mongodb+srv://admin:pkGjk2QStx7KB7Ph@cluster0.vpya9ja.mongodb.net/?retryWrites=true&w=majority';
 mongoose.connect(db_link)
 .then(function(db){
@@ -30,4 +31,4 @@ const bookSchema=mongoose.Schema({
 
 const bookModel=mongoose.model('bookModel',bookSchema);
 
-modul.exports=bookModel;
+module.exports=bookModel;

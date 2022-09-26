@@ -1,10 +1,11 @@
 const express=require('express');
 const bookRouter=express.Router();
-
+const { model } = require('mongoose');
+const {addBookInfo,getBook,getAllBooks,updateBookInfo,deleteBookInfo}=require('../controllers/bookControllers');
 
 bookRouter
 .route('/addBook')
-.post(addBook)
+.post(addBookInfo)
 
 bookRouter
 .route('/:id')
@@ -15,3 +16,6 @@ bookRouter
 bookRouter
 .route('/')
 .get(getAllBooks)
+
+
+module.exports=bookRouter;
