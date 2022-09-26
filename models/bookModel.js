@@ -12,7 +12,8 @@ mongoose.connect(db_link)
 const bookSchema=mongoose.Schema({
     name:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     author:{
         type:String,
