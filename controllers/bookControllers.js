@@ -49,7 +49,26 @@ module.exports.updateBookInfo = function updateBookInf(req, res) {
 
 }
 
-module.exports.deleteBookInfo = function deleteBookInfo(req, res) {
+module.exports.deleteBookInfo = async function deleteBookInfo(req, res) {
+    try {
+        const id = req.params.id;
+        const book = await bookModel.findByIdAndDelete(id);
+        if (!book) {
+            res.json({
+                message: 'book not found'
+            });
+        } else {
+            res.json({
+                message: 'book has been deleted from database',
+                result: book
+            });
+        }
+    }catch(err){
+        res.json({
+            message:err.message
+        })
+    }
+
 
 }
 module.exports.getAllBooks = async function getAllBooks(req, res) {
@@ -60,14 +79,14 @@ module.exports.getAllBooks = async function getAllBooks(req, res) {
                 message: 'books received',
                 result: books
             });
-        }else{
+        } else {
             res.json({
-                message:'error while getting all book information'
+                message: 'error while getting all book information'
             })
         }
-    }catch(err){
+    } catch (err) {
         res.json({
-            message:err.message
+            message: err.message
         })
     }
 
