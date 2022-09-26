@@ -45,8 +45,35 @@ module.exports.getBook = async function getBook(req, res) {
     }
 }
 
-module.exports.updateBookInfo = function updateBookInf(req, res) {
-
+module.exports.updateBookInfo = async function updateBookInf(req, res) {
+    try {
+        const id = req.params.id;
+        const book = await bookModel.findById(id);
+        const dataToBeUpdated = req.body;
+        if (book) {
+            let keys = [];
+            for (let key in dataToBeUpdated) {
+                keys.push(key);
+            }
+            // console.log(keys);
+            for (let i = 0; i < keys.length; i++) {
+                book[keys[i]] = dataToBeUpdated[keys[i]];
+            }
+            const updatedData = await book.save();
+            res.json({
+                message: "data updated successfully",
+                result: book
+            });
+        } else {
+            res.json({
+                message: "book not found"
+            })
+        }
+    }catch(err){
+        res.json({
+            message:err.message
+        })
+    }
 }
 
 module.exports.deleteBookInfo = async function deleteBookInfo(req, res) {
@@ -63,9 +90,9 @@ module.exports.deleteBookInfo = async function deleteBookInfo(req, res) {
                 result: book
             });
         }
-    }catch(err){
+    } catch (err) {
         res.json({
-            message:err.message
+            message: err.message
         })
     }
 
