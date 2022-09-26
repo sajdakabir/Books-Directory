@@ -8,7 +8,7 @@ module.exports.addBookInfo = async function addBookInfo(req, res) {
         if (book) {
             return res.json({
                 message: 'book information added succfully',
-                result:book
+                result: book
             });
 
         } else {
@@ -52,6 +52,23 @@ module.exports.updateBookInfo = function updateBookInf(req, res) {
 module.exports.deleteBookInfo = function deleteBookInfo(req, res) {
 
 }
-module.exports.getAllBooks = function getAllBooks(req, res) {
+module.exports.getAllBooks = async function getAllBooks(req, res) {
+    try {
+        const books = await bookModel.find();
+        if (books) {
+            res.json({
+                message: 'books received',
+                result: books
+            });
+        }else{
+            res.json({
+                message:'error while getting all book information'
+            })
+        }
+    }catch(err){
+        res.json({
+            message:err.message
+        })
+    }
 
 }
