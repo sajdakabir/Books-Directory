@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 const { model } = require('mongoose');
-const db_link='mongodb+srv://admin:pkGjk2QStx7KB7Ph@cluster0.vpya9ja.mongodb.net/?retryWrites=true&w=majority';
+const db_link=require('../secrets');
 mongoose.connect(db_link)
 .then(function(db){
     console.log('db is connected');
